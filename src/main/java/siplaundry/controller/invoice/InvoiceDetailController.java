@@ -19,6 +19,7 @@ import siplaundry.util.ViewUtil;
 import siplaundry.view.admin.TransactionView;
 import siplaundry.view.admin.components.modal.ConfirmDialog;
 import siplaundry.view.invoice.InvoiceDetailView;
+import siplaundry.view.print.ReceiptPrint;
 import toast.Toast;
 import toast.ToastType;
 
@@ -84,6 +85,13 @@ public class InvoiceDetailController {
             new Toast((AnchorPane) shadow_root.getScene().getRoot())
                     .show(ToastType.SUCCESS, "Berhasil membatalkan transaksi", null);
         }, "Anda akan membatalkan transaksi ini", true);
+    }
+
+    @FXML
+    void printReceipt() {
+        new ReceiptPrint(transaction, detailRepo.get(new HashMap<>() {{
+            put("transaction_id", transaction.getid());
+        }}));
     }
 
     void addDetailElements() {
